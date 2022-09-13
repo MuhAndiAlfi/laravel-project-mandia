@@ -1,0 +1,8 @@
+.dataTables_filter {
+    float: left !important;
+ }
+ .error{
+    font-size: 1rem !important ;
+    width: 100% !important; 
+    height: 2rem;
+ }
