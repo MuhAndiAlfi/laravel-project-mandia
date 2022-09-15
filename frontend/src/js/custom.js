@@ -1,4 +1,5 @@
-var url = "http://localhost:8000/api/";
+var url = "https://andi.test.arkamaya.net/api/";
+// var url = "http://localhost:8000/api/";
 
 $(document).ready( function () {
 
@@ -132,12 +133,13 @@ function searchProject(){
     '');
 
     $.ajax({
-        url: url + 'searchProject/',
+        url: url + 'searchProject',
         type: 'POST',
         data: data,
         dataType: 'json',
         success: function (response) {
             // console.log(response)
+
             $('#dataTable').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -223,7 +225,10 @@ function formEdit(id){
         type: 'GET',
 
         success: function (response) {
+
             $.each(response, function(k, v){
+            console.log(v)
+
                 $('#select-client-edit').append('<option value='+v.client_id+'>'+v.client_name+'</option>')
             })
         },
@@ -243,7 +248,7 @@ function createData(){
     if($('#formAdd').valid()){
         var data = $('#formAdd').serialize();
         $.ajax({
-            url: url + 'project/',
+            url: url + 'project',
             type: 'POST',
             data: data,
             success: function (response) {
@@ -272,6 +277,7 @@ function editData(id){
         $.ajax({
             url: url + 'project/'+id,
             type: 'PUT',
+            cache: false,
             data: data,
             success: function (response) {
                 if(response){
@@ -310,10 +316,12 @@ function destroySelected(){
 
     if(check == true){
         $.ajax({
-            url: url + 'projectall/',
+            url: url + 'projectall',
             type: "DELETE",
             data: 'ids=' + selected,
+            cache: false,
             success: function(response){
+                console.log(response)
                 if(response){
                     alert('success')
                     window.location.reload()
